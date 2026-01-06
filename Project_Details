@@ -1,0 +1,58 @@
+Project Title: Weather Prediction using Machine Learning
+Description
+
+This is a beginner-friendly machine learning project that predicts temperature based on humidity, pressure and wind speed using a Linear Regression model.
+It’s simple, quick to run and great for your GitHub + YBI Foundation internship submission.
+
+Technologies Used
+
+Python
+
+Pandas
+
+Scikit-learn
+
+Matplotlib
+
+Code: weather_prediction.py
+# Weather Prediction using Linear Regression
+
+# Importing Libraries
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+import matplotlib.pyplot as plt
+
+# Sample Dataset (You can replace with weather.csv)
+data = {
+    'Humidity': [80, 60, 90, 75, 65, 85, 70, 95],
+    'Pressure': [1002, 1008, 1000, 1005, 1010, 1003, 1007, 999],
+    'WindSpeed': [10, 8, 12, 9, 7, 11, 10, 13],
+    'Temperature': [29, 31, 27, 30, 32, 28, 31, 26]
+}
+
+df = pd.DataFrame(data)
+
+# Splitting data
+X = df[['Humidity', 'Pressure', 'WindSpeed']]
+y = df['Temperature']
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
+
+# Model Training
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+# Prediction
+y_pred = model.predict(X_test)
+
+# Display Results
+print("Predicted Temperatures:", y_pred)
+print("Actual Temperatures:", y_test.values)
+
+# Visualization
+plt.scatter(y_test, y_pred, color='blue')
+plt.xlabel('Actual Temperature')
+plt.ylabel('Predicted Temperature')
+plt.title('Weather Prediction - Actual vs Predicted')
+plt.show()
